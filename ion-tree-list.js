@@ -34,12 +34,20 @@ angular.module('ion-tree-list', [], function($rootScopeProvider){
         restrict: 'E',
         scope: {
             items: '=',
-            collapsed: '='
+            collapsed: '=',
+            templateUrl: '@',
+            action: '&'
         },
         templateUrl: CONF.baseUrl + '/ion-tree-list.tmpl.html',
         controller: function($scope){
             $scope.baseUrl = CONF.baseUrl;
             $scope.toggleCollapse = toggleCollapse;
+
+            // Calling the parent controller scope from the directive isolated scope, with parameters, very tricky
+            // @see http://weblogs.asp.net/dwahlin/creating-custom-angularjs-directives-part-3-isolate-scope-and-function-parameters
+            $scope.category_click = function (item) {
+                $scope.action({ item: item });
+            }
 
             $scope.$watch('collapsed', function(){
                 $scope.toggleCollapse($scope.items);
@@ -48,6 +56,8 @@ angular.module('ion-tree-list', [], function($rootScopeProvider){
             $scope.$watch('items', function(){
                 $scope.items = addDepthToTree($scope.items, 1, $scope.collapsed);
             });
+
+            $scope.templateUrl = $scope.templateUrl ? $scope.templateUrl : 'item_default_renderer';
         }
     }
 });
