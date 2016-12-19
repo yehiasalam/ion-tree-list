@@ -1,8 +1,8 @@
 {
-  "name": "ion-tree-list",
+  "name": "appfactory-ion-tree-list",
   "main": "ion-tree-list.js",
   "version": "0.0.2",
-  "homepage": "https://github.com/fer/ion-tree-list",
+  "homepage": "https://github.com/yehiasalam/ion-tree-list",
   "authors": [
     "fer <fer@ferqwerty.com>"
   ],
